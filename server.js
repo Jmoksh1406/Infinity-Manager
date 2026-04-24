@@ -18,7 +18,7 @@ app.get('/admin', (req, res) => {
     if (req.query.key !== ADMIN_KEY) {
         return res.status(403).send('<h1>Access Denied</h1><p>Invalid or missing admin key.</p><a href="/">Go Back</a>');
     }
-    const adminPath = path.resolve(PUBLIC_DIR, 'admin.html');
+    const adminPath = path.resolve(__dirname, 'views', 'admin.html');
     fs.readFile(adminPath, 'utf8', (err, html) => {
         if (err) {
             console.error('Error serving admin.html:', err.message);
