@@ -5,9 +5,32 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DATA_FILE = path.join(__dirname, 'data.json');
 const PUBLIC_DIR = path.resolve(__dirname, 'public');
 const ADMIN_KEY = process.env.ADMIN_KEY || 'infinityturningxc32026';
+
+// On Vercel (production), the filesystem is read-only except /tmp
+// Locally, use the project directory as usual
+const IS_VERCEL = process.env.VERCEL === '1';
+const DATA_FILE = IS_VERCEL ? '/tmp/data.json' : path.join(__dirname, 'data.json');
+const LOG_FILE = IS_VERCEL ? '/tmp/logs.json' : path.join(__dirname, 'logs.json');
+const SEED_DATA = path.join(__dirname, 'data.json');
+const SEED_LOGS = path.join(__dirname, 'logs.json');
+
+// Seed /tmp files from bundled defaults if they don't exist (Vercel cold start)
+function ensureDataFiles() {
+    if (!IS_VERCEL) return;
+    try {
+        if (!fs.existsSync(DATA_FILE)) {
+            fs.copyFileSync(SEED_DATA, DATA_FILE);
+        }
+    } catch (e) { console.error('Failed to seed data.json:', e.message); }
+    try {
+        if (!fs.existsSync(LOG_FILE)) {
+            fs.writeFileSync(LOG_FILE, '[]');
+        }
+    } catch (e) { console.error('Failed to seed logs.json:', e.message); }
+}
+ensureDataFiles();
 
 app.use(express.json());
 app.use(cors());
@@ -62,8 +85,6 @@ app.get('/api/go/:id', (req, res) => {
         }
     });
 });
-
-const LOG_FILE = path.join(__dirname, 'logs.json');
 
 // Log student access
 app.post('/api/log-access', (req, res) => {
