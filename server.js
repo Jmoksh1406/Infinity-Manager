@@ -13,10 +13,15 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(PUBLIC_DIR)); // Serve frontend
 
-// Serve admin page at /admin (requires ?key=ADMIN_KEY)
+// Block /admin (no key) — always returns 404
 app.get('/admin', (req, res) => {
-    if (req.query.key !== ADMIN_KEY) {
-        return res.status(403).send('<h1>Access Denied</h1><p>Invalid or missing admin key.</p><a href="/">Go Back</a>');
+    res.status(404).send('<h1>404 — Not Found</h1><a href="/">Go Back</a>');
+});
+
+// Serve admin page at /admin/:key (key is part of the URL path)
+app.get('/admin/:key', (req, res) => {
+    if (req.params.key !== ADMIN_KEY) {
+        return res.status(404).send('<h1>404 — Not Found</h1><a href="/">Go Back</a>');
     }
     const adminPath = path.resolve(__dirname, 'views', 'admin.html');
     fs.readFile(adminPath, 'utf8', (err, html) => {
