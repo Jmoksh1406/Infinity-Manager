@@ -1,4 +1,5 @@
 let adminRoundsData = [];
+const ADMIN_KEY = new URLSearchParams(window.location.search).get('key') || '';
 
 document.addEventListener("DOMContentLoaded", () => {
     loadAdminDashboard();
@@ -137,7 +138,10 @@ async function saveChanges() {
     try {
         const response = await fetch('/api/update', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'x-admin-key': ADMIN_KEY
+            },
             body: JSON.stringify({ rounds: adminRoundsData })
         });
         

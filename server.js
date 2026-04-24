@@ -7,13 +7,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data.json');
 const PUBLIC_DIR = path.resolve(__dirname, 'public');
+const ADMIN_KEY = process.env.ADMIN_KEY || 'infinity2026';
 
 app.use(express.json());
 app.use(cors());
 app.use(express.static(PUBLIC_DIR)); // Serve frontend
 
-// Serve admin page at /admin
+// Serve admin page at /admin (requires ?key=ADMIN_KEY)
 app.get('/admin', (req, res) => {
+    if (req.query.key !== ADMIN_KEY) {
+        return res.status(403).send('<h1>Access Denied</h1><p>Invalid or missing admin key.</p><a href="/">Go Back</a>');
+    }
     const adminPath = path.resolve(PUBLIC_DIR, 'admin.html');
     fs.readFile(adminPath, 'utf8', (err, html) => {
         if (err) {
@@ -72,8 +76,11 @@ app.post('/api/log-access', (req, res) => {
     });
 });
 
-// Update rounds (no auth required)
+// Update rounds (requires admin key)
 app.post('/api/update', (req, res) => {
+    if (req.headers['x-admin-key'] !== ADMIN_KEY) {
+        return res.status(403).json({ error: 'Invalid or missing admin key.' });
+    }
     const { rounds } = req.body;
     
     fs.writeFile(DATA_FILE, JSON.stringify(rounds, null, 2), (err) => {
