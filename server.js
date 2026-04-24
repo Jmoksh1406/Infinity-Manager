@@ -11,15 +11,17 @@ const ADMIN_KEY = process.env.ADMIN_KEY || 'infinityturningxc32026';
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(PUBLIC_DIR)); // Serve frontend
 
-// Block /admin (no key) — always returns 404
-app.get('/admin', (req, res) => {
+// Block ALL /admin requests — returns 404 (prevents cached access)
+app.all('/admin', (req, res) => {
+    res.status(404).send('<h1>404 — Not Found</h1><a href="/">Go Back</a>');
+});
+app.all('/admin/*', (req, res) => {
     res.status(404).send('<h1>404 — Not Found</h1><a href="/">Go Back</a>');
 });
 
-// Serve admin page at /admin/:key (key is part of the URL path)
-app.get('/admin/:key', (req, res) => {
+// Serve admin page at /panel/:key (key is part of the URL path)
+app.get('/panel/:key', (req, res) => {
     if (req.params.key !== ADMIN_KEY) {
         return res.status(404).send('<h1>404 — Not Found</h1><a href="/">Go Back</a>');
     }
@@ -32,6 +34,8 @@ app.get('/admin/:key', (req, res) => {
         res.type('html').send(html);
     });
 });
+
+app.use(express.static(PUBLIC_DIR)); // Serve frontend AFTER admin blocks
 
 // Get rounds data
 app.get('/api/rounds', (req, res) => {
