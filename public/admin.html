@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Bid & Byte</title>
+    <meta name="description" content="Admin Control Panel for Bid & Byte event — manage rounds, URLs, and access.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="bid_byte_logo.png" type="image/png">
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Floating Binary Rain -->
+    <div class="binary-rain" id="binary-rain"></div>
+
+    <div class="container">
+        <!-- Admin Dashboard -->
+        <div class="glass-box" id="dashboard-section">
+            <div class="admin-header">
+                <div class="admin-icon-circle">🎛️</div>
+                <h1 class="admin-title">Control Panel</h1>
+                <p class="subtitle">Manage event rounds, URLs, and access control.</p>
+                <div class="pulse-line"></div>
+            </div>
+
+            <div id="admin-rounds-container">
+                <!-- Admin controls injected here -->
+            </div>
+
+            <p id="save-status" class="success-text"></p>
+            <button onclick="saveChanges()" class="primary-btn" id="deploy-btn">Deploy Changes</button>
+            <div style="margin-top: 20px;">
+                <a href="/" class="admin-link" id="view-event-btn">← View Event Page</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="event-footer">
+            <div class="footer-clubs">
+                <span>The Turing Club</span>
+                <span class="footer-divider">|</span>
+                <span>Crypto Collaborative Cell (C3)</span>
+            </div>
+            <p class="footer-copy">© 2026 Bid & Byte. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

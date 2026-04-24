@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Round 1",
+    "url": "https://ai-jailbreak-platform.vercel.app/",
+    "locked": true
+  },
+  {
+    "id": 2,
+    "name": "Round 2",
+    "url": "https://trust-issues-mocha.vercel.app/",
+    "locked": true
+  },
+  {
+    "id": 3,
+    "name": "Round 3",
+    "url": "https://game-arena-six.vercel.app/",
+    "locked": true
+  }
+]

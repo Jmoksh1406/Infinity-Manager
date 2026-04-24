@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid & Byte | The Turing Club × C3</title>
+    <meta name="description" content="Bid & Byte — A collaborative tech event by The Turing Club and Crypto Collaborative Cell (C3). Join the ultimate fusion of Computer Science and Crypto.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="bid_byte_logo.png" type="image/png">
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Floating Binary Rain -->
+    <div class="binary-rain" id="binary-rain"></div>
+
+    <div class="container">
+        <!-- Student View -->
+        <div class="glass-box" id="event-section">
+            <!-- Hero Section -->
+            <div class="hero-header">
+                <div class="dual-logo-section">
+                    <div class="club-logo-card">
+                        <div class="logo-wrapper">
+                            <img src="turing_logo.png" alt="The Turing Club" class="club-logo" id="turing-logo">
+                            <div class="logo-glow logo-glow-cyan"></div>
+                        </div>
+                        <span class="club-label">The Turing Club</span>
+                    </div>
+                    <div class="collab-divider">
+                        <span class="collab-x-large">×</span>
+                    </div>
+                    <div class="club-logo-card">
+                        <div class="logo-wrapper">
+                            <img src="c3_logo.png" alt="Crypto Collaborative Cell" class="club-logo" id="c3-logo">
+                            <div class="logo-glow logo-glow-purple"></div>
+                        </div>
+                        <span class="club-label">Crypto Collaborative Cell</span>
+                    </div>
+                </div>
+                <div class="presents-tag">— present —</div>
+                <h1 class="event-title">
+                    <span class="title-bid">BID</span>
+                    <span class="title-ampersand">&</span>
+                    <span class="title-byte">BYTE</span>
+                </h1>
+                <p class="subtitle">Where Computer Science meets Cryptocurrency.<br>Select a round to begin your challenge.</p>
+                <div class="pulse-line"></div>
+            </div>
+
+            <div id="rounds-container" class="rounds-container">
+                <!-- Round cards injected here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="event-footer">
+            <div class="footer-clubs">
+                <span>The Turing Club</span>
+                <span class="footer-divider">|</span>
+                <span>Crypto Collaborative Cell (C3)</span>
+            </div>
+            <p class="footer-copy">© 2026 Bid & Byte. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
