@@ -15,6 +15,6 @@
     "id": 3,
     "name": "Round 3",
     "url": "https://game-arena-six.vercel.app/",
-    "locked": true
+    "locked": false
   }
 ]

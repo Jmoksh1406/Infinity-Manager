@@ -1,5 +1,5 @@
 let adminRoundsData = [];
-const ADMIN_KEY = new URLSearchParams(window.location.search).get('key') || '';
+const ADMIN_KEY = window.location.pathname.split('/').pop() || '';
 
 document.addEventListener("DOMContentLoaded", () => {
     loadAdminDashboard();

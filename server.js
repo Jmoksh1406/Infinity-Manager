@@ -13,10 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 // Block ALL /admin requests — returns 404 (prevents cached access)
-app.all('/admin', (req, res) => {
-    res.status(404).send('<h1>404 — Not Found</h1><a href="/">Go Back</a>');
-});
-app.all('/admin/*', (req, res) => {
+app.use('/admin', (req, res) => {
     res.status(404).send('<h1>404 — Not Found</h1><a href="/">Go Back</a>');
 });
 
